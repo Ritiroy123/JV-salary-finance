@@ -541,7 +541,8 @@ salary_columns_to_sum = [
 ]
 
 # Initialize an empty DataFrame to store the final result
-result_df = pd.DataFrame(columns=["GL Code", "Debit", "Credit", "Branch", "Department", "Emp Code", "Dimension Exists"])
+result_df = pd.DataFrame(columns=["GL Code", "Debit", "Credit", "Branch", "Department", "Emp Code", "Dimension Exists","External Doc"])
+external_doc_value = input("Enter the value for External Doc: ")
 
 # Iterate through the unique values in 'Zoho Heads' column of df1
 for value in df1['Zoho Heads'].unique():
@@ -616,12 +617,15 @@ for value in df1['Zoho Heads'].unique():
         continue
 
     # Append the temporary DataFrame to the result DataFrame
+    temp_df["External Doc"] = external_doc_value  
     result_df = result_df._append(temp_df, ignore_index=True)
 
 # Save the result to a new Excel file
 DIR = os.path.dirname(input_path)
-file = "output" + os.path.basename(input_path)
+file = "output2" + os.path.basename(input_path)
 user_output = os.path.join(DIR, file)
 
 filtered_result_df = result_df[(result_df['Debit'] != 0) | (result_df['Credit'] != 0)]
 filtered_result_df.to_excel(user_output, index=False)
+
+

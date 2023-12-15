@@ -7,8 +7,8 @@ input_path = Path(input("Enter the path of your Excel file: "))
 excel_file = pd.ExcelFile(input_path)
 
 # Specify the sheet names
-sheet_name_1 = ("GL_Code")
-sheet_name_2 = ("Deferred Raw File")
+sheet_name_1 = ("GL_Code2")
+sheet_name_2 = ("Deferred")
 
 # Read the sheets into DataFrames
 df1 = excel_file.parse(sheet_name_1)
@@ -27,7 +27,7 @@ salary_columns_to_sum = [
 ]
 
 # Initialize an empty DataFrame to store the final result
-result_df = pd.DataFrame(columns=["GL Code", "Debit", "Credit", "Branch", "Department", "Emp Code", "Dimension Exists","External Doc"])
+result_df = pd.DataFrame(columns=["GL Code", "Debit", "Credit","External Doc", "Branch", "Department", "Emp Code", "Dimension Exists"])
 external_doc_value = input("Enter the value for External Doc: ")
 
 # Iterate through the unique values in 'Zoho Heads' column of df1
@@ -51,8 +51,8 @@ for value in df1['Zoho Heads'].unique():
         # Calculate the sum of salary components
         temp_df = pd.DataFrame({
             "GL Code": rows_matching_value['GL Code'].values[0],
-            "Debit": grouped_data[salary_columns_to_sum].sum(axis=1),
-            "Credit": 0,
+            "Debit": 0,
+            "Credit": grouped_data[salary_columns_to_sum].sum(axis=1),
             "Branch": grouped_data['Branch'],
             "Department": grouped_data['Department'] if 'Department' in grouped_data.columns else ' ',
             "Emp Code": grouped_data['Employee ID'] if 'Employee ID' in grouped_data.columns else ' ',

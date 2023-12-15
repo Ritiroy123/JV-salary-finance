@@ -8,7 +8,7 @@ excel_file = pd.ExcelFile(input_path)
 
 # Specify the sheet names
 sheet_name_1 = ("GL_Code")
-sheet_name_2 = ("nps_raw data")
+sheet_name_2 = ("NPS")
 
 # Read the sheets into DataFrames
 df1 = excel_file.parse(sheet_name_1)
@@ -27,7 +27,7 @@ salary_columns_to_sum = [
 ]
 
 # Initialize an empty DataFrame to store the final result
-result_df = pd.DataFrame(columns=["GL Code", "Debit", "Credit", "Branch", "Department", "Emp Code", "Dimension Exists","External Doc"])
+result_df = pd.DataFrame(columns=["GL Code", "Debit", "Credit","External Doc", "Branch", "Department", "Emp Code", "Dimension Exists"])
 external_doc_value = input("Enter the value for External Doc: ")
 
 # Iterate through the unique values in 'Zoho Heads' column of df1
@@ -108,7 +108,7 @@ for value in df1['Zoho Heads'].unique():
 
 # Save the result to a new Excel file
 DIR = os.path.dirname(input_path)
-file = "Output" + os.path.basename(input_path)
+file = "npsOutput" + os.path.basename(input_path)
 user_output = os.path.join(DIR, file)
 
 filtered_result_df = result_df[(result_df['Debit'] != 0) | (result_df['Credit'] != 0)]

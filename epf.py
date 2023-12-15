@@ -9,7 +9,7 @@ excel_file = pd.ExcelFile(input_path)
 
 # Specify the sheet names
 sheet_name_1 = ("GL_Code")
-sheet_name_2 = ("epf_raw data")
+sheet_name_2 = ("EPF")
 
 # Read the sheets into DataFrames
 df1 = excel_file.parse(sheet_name_1)
@@ -31,7 +31,7 @@ salary_columns_to_sum2 = [
 ]
 
 # Initialize an empty DataFrame to store the final result
-result_df = pd.DataFrame(columns=["GL Code", "Debit", "Credit", "Branch", "Department", "Emp Code", "Dimension Exists","External Doc"])
+result_df = pd.DataFrame(columns=["GL Code", "Debit", "Credit","External Doc", "Branch", "Department", "Emp Code", "Dimension Exists"])
 external_doc_value = input("Enter the value for External Doc: ")
 
 # Iterate through the unique values in 'Zoho Heads' column of df1
@@ -62,7 +62,7 @@ for value in df1['Zoho Heads'].unique():
             "Emp Code": grouped_data['Employee ID'] if 'Employee ID' in grouped_data.columns else ' ',
             "Dimension Exists": "Yes" if dimension_value else "No"
         })
-    elif value == "EPF Contribution":
+    elif value == "sum_of_epf":
         dimension_value = rows_matching_value['Dimension'].iloc[0]
         sign = rows_matching_value['Sign'].iloc[0]
 

@@ -541,7 +541,7 @@ salary_columns_to_sum = [
 ]
 
 # Initialize an empty DataFrame to store the final result
-result_df = pd.DataFrame(columns=["GL Code", "Debit", "Credit", "Branch", "Department", "Emp Code", "Dimension Exists","External Doc"])
+result_df = pd.DataFrame(columns=["GL Code", "Debit", "Credit","External Doc", "Branch", "Department", "Emp Code", "Dimension Exists"])
 external_doc_value = input("Enter the value for External Doc: ")
 
 # Iterate through the unique values in 'Zoho Heads' column of df1
